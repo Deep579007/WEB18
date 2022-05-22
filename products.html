@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+table,
+td,
+th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+th,
+td {
+  padding: 15px;
+}
+
+tr > th {
+  background-color:orange;
+  color: black;
+}
+    </style>
+</head>
+<body>
+    <main>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>image</th>
+              <th>Price</th>
+              <th>Gender</th>
+              <th id="sold">Sold</th>
+              <th id="remove">Remove</th>
+            </tr>
+          </thead>
+          <tbody class="product"">
+            <!-- Append your output to tbody -->
+          </tbody>
+        </table>
+      </main>
+</body>
+</html>
+<script>
+    var ProArr =JSON.parse(localStorage.getItem("Products"));
+
+displayData(ProArr);
+
+function displayData(arr){
+
+arr.forEach(function(el,index){
+
+var tr = document.createElement("tr");
+
+var td1 = document.createElement("td");
+td1.innerText=el.name;
+
+var td2 = document.createElement("td");
+td2.innerText=el.category;
+
+var td3 = document.createElement("td");
+td3.innerText=el.image;
+
+var td4 = document.createElement("td");
+td4.innerText=el.price;
+
+var td5 = document.createElement("td");
+td5.innerText=el.gender;
+
+var td6 = document.createElement("td");
+td6.innerText=el.sold;
+
+
+
+var td7 = document.createElement("button");
+td7.innerText="Remove";
+td7.style.color="red";
+td7.style.cursor="pointer";
+td7.addEventListener("click",function(event){
+event.target.parentNode.remove();
+});
+
+
+
+tr.append(td1,td2,td3,td4,td5,td6,td7);
+
+document.querySelector("tbody").append(tr);
+
+});
+
+}
+function deleteItem(el,index){
+    ProArr.splice(index,1);
+localStorage.setItem("ProArr",JSON.stringify(ProArr));
+window.location.reload();
+}
+
+</script>
